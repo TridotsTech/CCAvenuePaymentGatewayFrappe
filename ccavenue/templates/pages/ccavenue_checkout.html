@@ -176,7 +176,7 @@ Loading...
 			</tr>
 		</table>
 	</form>
-	<form id="nonseamless" method="post" name="redirect" action="https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction" >
+	<form id="nonseamless" method="post" name="redirect" action="https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction" >
 	</form>
 	<style type="text/css">
 		.th-txt {
@@ -216,32 +216,21 @@ Loading...
 		 			var $form = $("#PaymentForm");
 				var formdata = getFormData($form);
 		 		
-		 //    $.ajax({
-   //              type:'POST',
-   //              Accept: 'application/json',
-   //              ContentType: 'application/json;charset=utf-8',
-   //              url:'/',
-   //              data:{'cmd':'ccavenue.templates.pages.ccavRequestHandler.ccavenue_request_payment',  
-   //               "payment_info":JSON.stringify(formdata)
-   //             },
-   //              dataType: "json",
-   //              async: false,
-   //              success: function (data){
-   //              	$("#nonseamless").html(data.message);
-   //              	$("#nonseamless").submit();
-   //              }
-   //          });
-   frappe.call({
-                    method:'ccavenue.templates.pages.ccavRequestHandler.ccavenue_request_payment',
-                    args:{
-                       "payment_info":JSON.stringify(formdata)
-                    },
-                    callback:function(data)
-                    { 
-                    $("#nonseamless").html(data.message);
+		    $.ajax({
+                type:'POST',
+                Accept: 'application/json',
+                ContentType: 'application/json;charset=utf-8',
+                url:'/',
+                data:{'cmd':'ccavenue.templates.pages.ccavRequestHandler.ccavenue_request_payment',  
+                 "payment_info":JSON.stringify(formdata)
+               },
+                dataType: "json",
+                async: false,
+                success: function (data){
+                	$("#nonseamless").html(data.message);
                 	$("#nonseamless").submit();
-                    }
-                });
+                }
+            });
  }
 function getFormData($form){
     var unindexed_array = $form.serializeArray();
