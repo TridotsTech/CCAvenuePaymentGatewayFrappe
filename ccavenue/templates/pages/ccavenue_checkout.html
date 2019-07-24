@@ -1,0 +1,247 @@
+{% extends "templates/Layout/customweb.html" %}
+
+{% block meta_block %}
+<meta name="description" content="{{MetaDescription}}">
+<meta name="keywords" content="{{MetaKeywords}}">
+ {% endblock %}
+ 
+ {% block content %}
+<div class="th-txt">
+		<div class="row">
+			<div class="col-md-12 col-xs-12 col-xs-12">
+                <div class="thank-you-page">
+                
+              <div class="centerdiv" style="
+    width: 510px;
+    margin: 30% auto;
+    text-align: center;
+">
+                    <h4 style="
+    margin-bottom: 35px;
+">
+<img src="/assets/ccavenue/images/ccavenue_logo.gif"/><br/>
+Loading...
+
+</h4>
+                
+                </div>
+                
+			</div>
+		</div>
+	</div>
+</div>
+	<form method="POST" name="customerData"   id="PaymentForm">
+	 
+		<table width="40%" height="100" border='0' align="center">
+			 
+			<tr>
+				 
+				<td><input type="hidden" name="merchant_id" id="merchant_id" value="{{gateway_settings.merchant_id}}" /> </td>
+			</tr>
+			<tr>
+			 
+				<td><input type="hidden" name="order_id" value="{{order_info.name}}" /></td>
+			</tr>
+			<tr>
+				 
+				<td><input type="hidden" name="currency" value="INR" /></td>
+			</tr>
+			<tr>
+			 
+				<td><input type="hidden" name="amount" value='{{"%0.2f" % order_info.total_amount | float}}' /></td>
+			</tr>
+			<tr>
+				 
+				<td><input type="hidden" name="redirect_url"
+					value="/ccavResponseHandler" />
+				</td>
+			</tr>
+			<tr>
+			 
+				<td><input type="hidden" name="cancel_url"
+					value="/ccavResponseHandler" />
+				</td>
+			</tr>
+			<tr>
+				 
+				<td><input type="hidden" name="language" id="language" value="EN" /></td>
+			</tr>
+			 
+			<tr>
+				 
+				<td><input type="hidden" name="billing_name" value="{{order_info.first_name}} {{order_info.last_name}} " /></td>
+			</tr>
+			<tr>
+				 
+				<td><input type="hidden" name="billing_address"
+					vvalue="{{order_info.address}} " /></td>
+			</tr>
+			<tr>
+				 
+				<td><input type="hidden" name="billing_city" value="{{order_info.city}}" /></td>
+			</tr>
+			<tr>
+				 
+				<td><input type="hidden" name="billing_state" value="{{order_info.state}}" /></td>
+			</tr>
+			<tr>
+			
+				<td><input type="hidden" name="billing_zip" value="{{order_info.zipcode}}" /></td>
+			</tr>
+			<tr>
+			
+				<td><input type="hidden" name="billing_country" value="{{order_info.country}}" />
+				</td>
+			</tr>
+			<tr>
+			
+				<td><input type="hidden" name="billing_tel"  value="{{order_info.phone}}" />
+				</td>
+			</tr>
+			<tr>
+			
+				<td><input type="hidden" name="billing_email"
+					value="{{order_info.customer_email}}" /></td>
+			</tr>
+			 
+			<tr>
+				
+				<td><input type="hidden" name="delivery_name"  value="{{order_info.shipping_first_name}} {{order_info.shipping_last_name}}" />
+				</td>
+			</tr>
+			<tr>
+			
+				<td><input type="hidden" name="delivery_address"
+					 value="{{order_info.shipping_shipping_address}}" /></td>
+			</tr>
+			<tr>
+			
+				<td><input type="hidden" name="delivery_city"  value="{{order_info.shipping_city}}" />
+				</td>
+			</tr>
+			<tr>
+			
+				<td><input type="hidden" name="delivery_state"  value="{{order_info.shipping_state}}"/>
+				</td>
+			</tr>
+			<tr>
+			
+				<td><input type="hidden" name="delivery_zip"  value="{{order_info.shipping_zipcode}}"/></td>
+			</tr>
+			<tr>
+			
+				<td><input type="hidden" name="delivery_country"  value="{{order_info.shipping_country}}" />
+				</td>
+			</tr>
+			<tr>
+			
+				<td><input type="hidden" name="delivery_tel"  value="{{order_info.shipping_phone}}" />
+				</td>
+			</tr>
+			<tr>
+				
+				<td><input type="hidden" name="merchant_param1"
+					value="" /></td>
+			</tr>
+			<tr>
+				
+				<td><input type="hidden" name="merchant_param2"
+					value="" /></td>
+			</tr>
+			<tr>
+				
+				<td><input type="hidden" name="merchant_param3"
+					value="" /></td>
+			</tr>
+			<tr>
+				
+				<td><input type="hidden" name="merchant_param4"
+					value="" /></td>
+			</tr>
+			<tr>
+			
+				<td><input type="hidden" name="merchant_param5"
+					value="" /></td>
+			</tr>
+			<tr>
+			
+				<td><input type="hidden" name="promo_code" value=""/></td>
+			</tr>
+			<tr>
+			
+				<td><input type="hidden" name="customer_identifier" value=""/></td>
+			</tr>
+			<tr>
+			
+			</tr>
+		</table>
+	</form>
+	<form id="nonseamless" method="post" name="redirect" action="https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction" >
+	</form>
+	<style type="text/css">
+		.th-txt {
+    min-height: 400px;
+    background: #fff;
+    margin: 20px;
+    padding: 20px;
+}@media screen and (min-width: 768px){
+.thank-you-page {
+    width: 570px;
+    margin: 0 auto;
+    float: none;
+    text-align: center;
+}
+}
+.th-txt  img
+{
+
+    margin-bottom: 20px;
+ 
+}
+	</style>
+	{% endblock %}
+	{% block script %}
+ <script type="text/javascript">
+ 	
+ 	$(document).ready(function(){
+ 		   setTimeout(function() {
+                   submitPaymentForm();
+                }, 2000)
+		 			
+		 		
+ 		});
+ function submitPaymentForm()
+ {
+ 		var formdata=$("#PaymentForm").serialize();
+		 			var $form = $("#PaymentForm");
+				var formdata = getFormData($form);
+		 		
+		    $.ajax({
+                type:'POST',
+                Accept: 'application/json',
+                ContentType: 'application/json;charset=utf-8',
+                url:'/',
+                data:{'cmd':'ccavenue.templates.pages.ccavRequestHandler.ccavenue_request_payment',  
+                 "payment_info":JSON.stringify(formdata)
+               },
+                dataType: "json",
+                async: false,
+                success: function (data){
+                	$("#nonseamless").html(data.message);
+                	$("#nonseamless").submit();
+                }
+            });
+ }
+function getFormData($form){
+    var unindexed_array = $form.serializeArray();
+    var indexed_array = {};
+
+    $.map(unindexed_array, function(n, i){
+        indexed_array[n['name']] = n['value'];
+    });
+
+    return indexed_array;
+}
+ </script>
+ {% endblock %}
+ 

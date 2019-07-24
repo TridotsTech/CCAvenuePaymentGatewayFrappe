@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include ccavenue *.css
+recursive-include ccavenue *.csv
+recursive-include ccavenue *.html
+recursive-include ccavenue *.ico
+recursive-include ccavenue *.js
+recursive-include ccavenue *.json
+recursive-include ccavenue *.md
+recursive-include ccavenue *.png
+recursive-include ccavenue *.py
+recursive-include ccavenue *.svg
+recursive-include ccavenue *.txt
+recursive-exclude ccavenue *.pyc
