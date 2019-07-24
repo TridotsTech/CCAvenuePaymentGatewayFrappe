@@ -212,25 +212,36 @@ Loading...
  		});
  function submitPaymentForm()
  {
- 		var formdata=$("#PaymentForm").serialize();
-		 			var $form = $("#PaymentForm");
-				var formdata = getFormData($form);
+ 		// var formdata=$("#PaymentForm").serialize();
+		 // 			var $form = $("#PaymentForm");
+			// 	var formdata = getFormData($form);
 		 		
-		    $.ajax({
-                type:'POST',
-                Accept: 'application/json',
-                ContentType: 'application/json;charset=utf-8',
-                url:'/',
-                data:{'cmd':'ccavenue.templates.pages.ccavRequestHandler.ccavenue_request_payment',  
-                 "payment_info":JSON.stringify(formdata)
-               },
-                dataType: "json",
-                async: false,
-                success: function (data){
-                	$("#nonseamless").html(data.message);
+		 //    $.ajax({
+   //              type:'POST',
+   //              Accept: 'application/json',
+   //              ContentType: 'application/json;charset=utf-8',
+   //              url:'/',
+   //              data:{'cmd':'ccavenue.templates.pages.ccavRequestHandler.ccavenue_request_payment',  
+   //               "payment_info":JSON.stringify(formdata)
+   //             },
+   //              dataType: "json",
+   //              async: false,
+   //              success: function (data){
+   //              	$("#nonseamless").html(data.message);
+   //              	$("#nonseamless").submit();
+   //              }
+   //          });
+   frappe.call({
+                    method:'ccavenue.templates.pages.ccavRequestHandler.ccavenue_request_payment',
+                    args:{
+                       "payment_info":JSON.stringify(formdata)
+                    },
+                    callback:function(data)
+                    { 
+                    $("#nonseamless").html(data.message);
                 	$("#nonseamless").submit();
-                }
-            });
+                    }
+                });
  }
 function getFormData($form){
     var unindexed_array = $form.serializeArray();
