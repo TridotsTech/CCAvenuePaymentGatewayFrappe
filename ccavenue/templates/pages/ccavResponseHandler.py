@@ -1,34 +1,21 @@
 #!/usr/bin/python
+from __future__ import unicode_literals
+# import frappe
+# from _future_ import unicode_literals
+import frappe
+from frappe import async
+import frappe.utils
+import json
+import calendar
+import razorpay
+from frappe import _
+from frappe.utils import getdate,nowdate
+from datetime import date
 
-from ccavutil import encrypt,decrypt
-from string import Template
-
-def res(encResp):
-	'''
-	Please put in the 32 bit alphanumeric key in quotes provided by CCAvenues.
-	'''	 
-	workingKey = ''
-	decResp = decrypt(encResp,workingKey)
-	data = '<table border=1 cellspacing=2 cellpadding=2><tr><td>'	
-	data = data + decResp.replace('=','</td><td>')
-	data = data.replace('&','</td></tr><tr><td>')
-	data = data + '</td></tr></table>'
-	
-	html = '''\
-	<html>
-		<head>
-			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-			<title>Response Handler</title>
-		</head>
-		<body>
-			<center>
-				<font size="4" color="blue"><b>Response Page</b></font>
-				<br>
-				$response
-			</center>
-			<br>
-		</body>
-	</html>
-	'''
-	fin = Template(html).safe_substitute(response=data)
-	return fin
+def get_context(context,**kwargs):
+	print('-----Payment Response------')
+	kwargs=frappe._dict(kwargs)
+	print(kwargs)
+def ccavenue_payment_response(**kwargs):
+	kwargs=frappe._dict(kwargs)
+	print(kwargs)
